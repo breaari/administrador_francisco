@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userFormData } from "../../../utils";
 import { FaXmark } from "react-icons/fa6";
-import { GetUsers, PostUser } from "../../../redux/actions";
+import { GetUsers, PostUser } from "../../../Redux/actions";
 import bcrypt from "bcryptjs";
 
 export const CreateUser = () => {
@@ -93,8 +93,8 @@ export const CreateUser = () => {
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="flex flex-row justify-between items-center space-x-2">
-                    <div className="w-1/2">
+              
+                   
                         <label className="flex items-center gap-2 text-gray-700">
                             Nombre
                         </label>
@@ -106,9 +106,8 @@ export const CreateUser = () => {
                         required
                         className="w-full border border-gray-300 p-2 rounded"
                         />
-                    </div>
+                    
 
-                    <div className="w-1/2">
                         <label className="flex items-center gap-2 text-gray-700">
                             Apellido
                         </label>
@@ -120,10 +119,10 @@ export const CreateUser = () => {
                         required
                         className="w-full border border-gray-300 p-2 rounded"
                         />
-                    </div>
-                </div>
-                <div className="flex flex-row justify-between items-center space-x-2">
-                    <div className="w-1/2">
+                    
+          
+           
+                  
                         <label className="flex items-center gap-2 text-gray-700">
                             Email
                         </label>
@@ -135,7 +134,7 @@ export const CreateUser = () => {
                         required
                         className="w-full border border-gray-300 p-2 rounded"
                         />
-                    </div>
+                  
 
                     {UsernameExistsError && (
                         <div className="text-red-600">
@@ -143,26 +142,9 @@ export const CreateUser = () => {
                         </div>
                     )}
 
-                    <div className="w-1/2">
-                        <label className="flex items-center gap-2 text-gray-700">
-                            Teléfono
-                        </label>
-                        <input
-                        type="text"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={(e) => {
-                            const sanitized = e.target.value.replace(/\D/g, "").slice(0, 10);
-                            setFormData({ ...formData, phone: sanitized });
-                        }}
-                        maxLength={10}
-                        required
-                        className="w-full border border-gray-300 p-2 rounded"
-                        />
-                    </div>
-                </div>
-                <div className="flex flex-row justify-between items-center space-x-2">
-                    <div className="w-1/2">
+                    
+       
+           
                         <label className="flex items-center gap-2 text-gray-700">
                             Contraseña
                         </label>
@@ -179,9 +161,9 @@ export const CreateUser = () => {
                             La contraseña debe contener al menos una mayúscula y un número.
                         </div>
                         )}
-                    </div>
+               
 
-                    <div className="w-1/2">
+                
                         <label className="flex items-center gap-2 text-gray-700">
                             Rol del Usuario
                         </label>
@@ -196,9 +178,7 @@ export const CreateUser = () => {
                         <option value="1">Administrador</option>
                         <option value="2">Empleado</option>
                         </select>
-                    </div>
-                </div>
-
+               
               <div className="flex justify-end gap-3 mt-6">
                 <button
                   type="button"

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { UpdateUser, GetUsers } from "../../../redux/actions";
+import { UpdateUser, GetUsers } from "../../../Redux/actions";
 import { FaXmark } from "react-icons/fa6";
 
 export default function EditUser({ user }) {

@@ -18,3 +18,10 @@ export const hasStaffAccess = (userRole) => {
   
   return userRole === 0 || userRole === 1 || userRole === 2;
 };
+
+export const supplierFormData = {
+  supplier_name: "",
+  cuit_or_cuil: "",
+  iva_condition: "",
+  current_account: "",
+};

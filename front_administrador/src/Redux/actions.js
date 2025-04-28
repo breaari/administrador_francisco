@@ -8,7 +8,14 @@ export const DELETE_USER = "DELETE_USER";
 
 export const SET_AUTHENTICATED_USER_ID = "SET_AUTHENTICATED_USER_ID";
 
+export const GET_SUPPLIERS = "GET_SUPPLIERS";
+export const GET_ID_SUPPLIER = "GET_ID_SUPPLIER";
+export const POST_SUPPLIER = "POST_SUPPLIER";
+export const UPDATE_SUPPLIER = "UPDATE_SUPPLIER";
+export const DELETE_SUPPLIER = "DELETE_SUPPLIER";
+
 const usersURL = import.meta.env.VITE_API_USERS_URL;
+const suppliersURL = import.meta.env.VITE_API_SUPPLIERS_URL;
 
 export const GetUsers = () => {
     return async function (dispatch) {
@@ -157,5 +164,99 @@ export const GetUsers = () => {
         }
       };
     };
+
+
+    export const GetSuppliers = () => {
+      return async function (dispatch) {
+          try {
+              const response = await axios.get(suppliersURL);
+              return dispatch({
+                  type: GET_SUPPLIERS,
+                  payload: response.data || [],
+              });
+          } catch (err) {
+              console.log(err);
+              throw err;
+          }
+      };
+  };
+  
+  export const GetSupplierDetail = (id) => {
+      return async function (dispatch) {
+          try {
+              const response = await axios.get(`${suppliersURL}?id=${id}`);
+              return dispatch({
+                  type: GET_ID_SUPPLIER,
+                  payload: response.data || [],
+              });
+          } catch (err) {
+              console.log(err);
+          }
+      };
+  };
+  
+  export const PostSupplier = (atributos) => {
+      return async function (dispatch) {
+          try {
+              const f = new FormData();
+              f.append("METHOD", "POST");
+              f.append("supplier_name", atributos.supplier_name);
+              f.append("cuit_or_cuil", atributos.cuit_or_cuil);
+              f.append("iva_condition", atributos.iva_condition);
+              f.append("current_account", atributos.current_account);
+              f.append("is_activate", 1); // Nuevo proveedor se activa por defecto
+          
+              const response = await axios.post(suppliersURL, f);
+  
+              return dispatch({
+                  type: POST_SUPPLIER,
+                  payload: response.data,
+              });
+          } catch (err) {
+              alert(err);
+              throw err;
+          }
+      };
+  };
+  
+  export const UpdateSupplier = (id, atributos) => {
+      return async function (dispatch) {
+          try {
+              const f = new FormData();
+              f.append("METHOD", "PUT");
+              f.append("supplier_name", atributos.supplier_name);
+              f.append("cuit_or_cuil", atributos.cuit_or_cuil);
+              f.append("iva_condition", atributos.iva_condition);
+              f.append("current_account", atributos.current_account);
+              f.append("is_activate", atributos.is_activate);
+  
+              const response = await axios.post(suppliersURL, f, { params: { id: atributos.id } });
+              console.log("Proveedor actualizado en la ACTION: ", response.data);
+              return dispatch({
+                  type: UPDATE_SUPPLIER,
+                  payload: response.data,
+              });
+          } catch (err) {
+              alert(err);
+              throw err;
+          }
+      };
+  };
+  
+  export const DeleteSupplier = (id) => {
+      return async function (dispatch) {
+          try {
+              const f = new FormData();
+              f.append("METHOD", "DELETE");
+              const response = await axios.post(suppliersURL, f, { params: { id: id } });
+              return dispatch({
+                  type: DELETE_SUPPLIER,
+                  payload: response.id,
+              });
+          } catch (err) {
+              alert("Error al eliminar proveedor: ", err);
+          }
+      };
+  };
 
     

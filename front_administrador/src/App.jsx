@@ -40,6 +40,7 @@ import './App.css';
 import Login from './components/Login/Login';
 import { Managment } from "./components/Managment/Managment";
 import { Users } from "./components/Managment/Users/users";
+import { Suppliers } from "./components/Managment/Suppliers/suppliers";
 
 const App = () => {
   return (
@@ -51,6 +52,7 @@ const App = () => {
       <Route path="/administrador/:id" element={<Managment />}>
         <Route index element={<div className="p-6">Bienvenido al panel de administración</div>} />
         <Route path="usuarios" element={<Users />} />
+        <Route path="proveedores" element={<Suppliers />} />
         {/* Podés agregar más: productos, configuraciones, etc */}
       </Route>
     </Routes>

@@ -13,9 +13,6 @@ export const Menu = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   
-  console.log("userDetail:", userDetail);
-  console.log("ID from params:", id);
-  
   useEffect(() => {
     setLoading(true);
     dispatch(GetUserDetail(id))
@@ -46,9 +43,10 @@ export const Menu = () => {
   
   // Verificar que userDetail existe antes de usarlo
   return (
+ 
     <div className="bg-black w-[275px] min-h-screen flex flex-col items-center">
       <img src={logo} className="w-[60%] py-8" alt="logo" />
-      <a className="text-white">
+      <a className="text-white pb-8">
         {userDetail && userDetail.first_name ? userDetail.first_name : "Usuario"}
       </a>
       <button
@@ -57,6 +55,13 @@ export const Menu = () => {
       >
         Gestor de usuarios
       </button>
+      <button
+        className="text-white border rounded-2xl py-1 px-4 mb-2"
+        onClick={() => handleNavigation("proveedores")}
+      >
+        Gestor de proveedores
+      </button>
     </div>
+
   );
 };

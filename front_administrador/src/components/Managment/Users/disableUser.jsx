@@ -1,93 +1,10 @@
-// import React, { useState } from "react";
-// import { useDispatch } from "react-redux";
-// import { UpdateUser, GetUsers } from "../../../Redux/actions";
-// import { FaXmark } from "react-icons/fa6";
-
-// export default function DisableUser({ user }) {
-
-//     console.log("userToDisable", user)
-//   const dispatch = useDispatch();
-//   const [showModal, setShowModal] = useState(false);
-
-//   const [formData, setFormData] = useState({
-//     ...user,
-//     email: "",
-//     clue: "",
-//     is_activate: 0,
-//   });
-
-//   const handleSave = async () => {
-//     try {
-//       await dispatch(UpdateUser(user.id, formData));
-//       await dispatch(GetUsers());
-//       setShowModal(false);
-//     } catch (error) {
-//       alert("Error actualizando usuario");
-//     }
-//   };
-
-//   const handleCloseModal = () => {
-//     setShowModal(false);
-//   };
-
-//   return (
-//     <>
-//       <button
-//         className="bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700"
-//         onClick={() => setShowModal(true)}
-//       >
-//         Deshabilitar
-//       </button>
-
-//       {showModal && (
-//         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-//           <div className="bg-white rounded-lg shadow-md w-full max-w-lg p-6">
-//             <div className="flex justify-between items-center mb-4">
-//               <h2 className="text-xl font-semibold">Confirmar desactivación</h2>
-//               <button
-//                 onClick={handleCloseModal}
-//                 className="text-gray-500 hover:text-gray-800 text-2xl"
-//               >
-//                 <FaXmark />
-//               </button>
-//             </div>
-
-//             <p className="text-gray-700 text-lg">
-//               ¿Está seguro que desea desactivar el usuario de{" "}
-//               <span className="font-semibold">
-//                 {user?.last_name} {user?.first_name}
-//               </span>
-//               ?
-//             </p>
-
-//             <div className="flex justify-end gap-3 mt-6">
-//               <button
-//                 onClick={handleCloseModal}
-//                 className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400"
-//               >
-//                 Cancelar
-//               </button>
-//               <button
-//                 onClick={handleSave}
-//                 className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
-//               >
-//                 Desactivar
-//               </button>
-//             </div>
-//           </div>
-//         </div>
-//       )}
-//     </>
-//   );
-// }
-
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { UpdateUser, GetUsers } from "../../../Redux/actions";
 import { FaXmark } from "react-icons/fa6";
 import bcrypt from "bcryptjs";
 
-export default function ToggleUserStatus({ user }) {
+export default function DisableUser({ user }) {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const [email, setEmail] = useState("");
