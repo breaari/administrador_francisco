@@ -41,6 +41,7 @@ import Login from './components/Login/Login';
 import { Managment } from "./components/Managment/Managment";
 import { Users } from "./components/Managment/Users/users";
 import { Suppliers } from "./components/Managment/Suppliers/suppliers";
+import { Clients } from "./components/Managment/Clients/clients";
 
 const App = () => {
   return (
@@ -53,6 +54,7 @@ const App = () => {
         <Route index element={<div className="p-6">Bienvenido al panel de administración</div>} />
         <Route path="usuarios" element={<Users />} />
         <Route path="proveedores" element={<Suppliers />} />
+        <Route path="clientes" element={<Clients />} />
         {/* Podés agregar más: productos, configuraciones, etc */}
       </Route>
     </Routes>

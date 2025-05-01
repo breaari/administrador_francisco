@@ -4,6 +4,8 @@ import { GetUsers } from "../../../Redux/actions";
 import { CreateUser } from "./createUser";
 import EditUser from "./editUser";
 import DisableUser from "./disableUser";
+import { getActivationStatus } from "../../../utils";
+
 
 export const Users = () => {
     const dispatch = useDispatch();
@@ -104,9 +106,7 @@ export const Users = () => {
                                 <td className="p-2">{user.first_name} {user.last_name}</td>
                                 <td className="p-2">{user.email}</td>
                                 <td className="p-2">{getRolNombre(user.user_role)}</td>
-                                <td className="p-2">
-                                    {user.is_activate === 1 ? "Activo" : "Inactivo"}
-                                </td>
+                                <td className="p-2">{getActivationStatus(user.is_activate)}</td>
                                 <td className="p-2 flex gap-2 justify-center">
                                     <EditUser user={user}></EditUser>
                                     <DisableUser user={user} ></DisableUser>

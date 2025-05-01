@@ -4,15 +4,17 @@ import { GetSuppliers } from "../../../Redux/actions";
 import { CreateSupplier } from "./createSupplier";
 import EditSupplier from "./editSupplier";
 import DisableSupplier from "./disableSupplier";
+import SeeSupplier from "./seeSupplier";
+import { getIvaConditionName, getCurrentAccountStatus, getActivationStatus } from "../../../utils";
+
 
 export const Suppliers = () => {
     const dispatch = useDispatch();
     const allSuppliers = useSelector((state) => state.suppliers);
 
     const [searchTerm, setSearchTerm] = useState("");
-    const [statusFilter, setStatusFilter] = useState("all"); // activo/inactivo
-    const [currentAccountFilter, setCurrentAccountFilter] = useState("all"); // cuenta corriente/sin cuenta corriente
-
+    const [statusFilter, setStatusFilter] = useState("all"); 
+    const [currentAccountFilter, setCurrentAccountFilter] = useState("all"); 
     useEffect(() => {
         dispatch(GetSuppliers());
     }, [dispatch]);
@@ -37,15 +39,6 @@ export const Suppliers = () => {
             return true;
         })
         .sort((a, b) => b.is_activate - a.is_activate);
-
-    const getIvaConditionName = (condition) => {
-        switch (condition) {
-            case 1: return "Responsable Inscripto";
-            case 6: return "Monotributista";
-            case 4: return "IVA Exento";
-            default: return "Condición desconocida";
-        }
-    };
 
     return (
         <div className="p-6">
@@ -102,9 +95,10 @@ export const Suppliers = () => {
                                 <td className="p-2">{supplier.supplier_name}</td>
                                 <td className="p-2">{supplier.cuit_or_cuil}</td>
                                 <td className="p-2">{getIvaConditionName(supplier.iva_condition)}</td>
-                                <td className="p-2">{supplier.current_account === 1 ? "Sí" : "No"}</td>
-                                <td className="p-2">{supplier.is_activate === 1 ? "Activo" : "Inactivo"}</td>
+                                <td className="p-2">{getCurrentAccountStatus(supplier.current_account)}</td>
+                                <td className="p-2">{getActivationStatus(supplier.is_activate)}</td>
                                 <td className="p-2 flex gap-2 justify-center">
+                                    <SeeSupplier supplier={supplier} />
                                     <EditSupplier supplier={supplier} />
                                     <DisableSupplier supplier={supplier} />
                                 </td>

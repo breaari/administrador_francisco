@@ -43,31 +43,80 @@ export default function Login() {
     setLoginError("");
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   if (isLoading) {
+  //     setLoginError("Cargando usuarios, por favor espere.");
+  //     return;
+  //   }
+
+  //   if (!formData.email || !formData.password) {
+  //     setLoginError("Por favor complete todos los campos");
+  //     return;
+  //   }
+
+  //   try {
+  //     const user = users.find(
+  //       (user) => user.email.toLowerCase() === formData.email.toLowerCase()
+  //     );
+
+  //     if (!user) {
+  //       setLoginError("Usuario no registrado");
+  //       return;
+  //     }
+  //     console.log("User completo:", user);
+
+
+  //     const truncatedPassword = formData.password.slice(0, 10);
+  //     const passwordMatch = await bcrypt.compare(truncatedPassword, user.clue);
+  //     console.log ("password:", formData.password)
+  //     console.log ("clue:", user.clue)
+  //     console.log(passwordMatch)
+
+  //     if (passwordMatch) {
+  //       dispatch(SetAuthenticatedUserId(user.id));
+  //       window.location.href = `administrador/${user.id}`;
+  //     } else {
+  //       setLoginError("Contraseña incorrecta");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error al iniciar sesión: ", error);
+  //     setLoginError("Error al iniciar sesión, intente de nuevo más tarde");
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (isLoading) {
       setLoginError("Cargando usuarios, por favor espere.");
       return;
     }
-
+  
     if (!formData.email || !formData.password) {
       setLoginError("Por favor complete todos los campos");
       return;
     }
-
+  
     try {
       const user = users.find(
         (user) => user.email.toLowerCase() === formData.email.toLowerCase()
       );
-
+  
       if (!user) {
         setLoginError("Usuario no registrado");
         return;
       }
-
+  
+      // Solo usar los primeros 10 caracteres para comparar
+    
       const passwordMatch = await bcrypt.compare(formData.password, user.clue);
-
+  
+      console.log("password original:", formData.password);
+      console.log("clue hash:", user.clue);
+      console.log("match:", passwordMatch);
+  
       if (passwordMatch) {
         dispatch(SetAuthenticatedUserId(user.id));
         window.location.href = `administrador/${user.id}`;
@@ -79,6 +128,7 @@ export default function Login() {
       setLoginError("Error al iniciar sesión, intente de nuevo más tarde");
     }
   };
+  
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">

@@ -43,7 +43,9 @@ export const Menu = () => {
   
   // Verificar que userDetail existe antes de usarlo
   return (
- 
+    <>
+     <UserAuthentication id={id} />
+    
     <div className="bg-black w-[275px] min-h-screen flex flex-col items-center">
       <img src={logo} className="w-[60%] py-8" alt="logo" />
       <a className="text-white pb-8">
@@ -61,7 +63,13 @@ export const Menu = () => {
       >
         Gestor de proveedores
       </button>
+      <button
+        className="text-white border rounded-2xl py-1 px-4 mb-2"
+        onClick={() => handleNavigation("clientes")}
+      >
+        Gestor de clientes
+      </button>
     </div>
-
+    </>
   );
 };

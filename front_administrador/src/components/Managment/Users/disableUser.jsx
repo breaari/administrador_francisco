@@ -39,7 +39,6 @@ export default function DisableUser({ user }) {
 
     try {
       const hashedPassword = isDisabled ? await bcrypt.hash(clue, 10) : "";
-
       const updatedUser = {
         ...user,
         email: isDisabled ? email : "",

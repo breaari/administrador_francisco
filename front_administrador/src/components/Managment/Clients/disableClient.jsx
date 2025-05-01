@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { UpdateSupplier, GetSuppliers } from "../../../Redux/actions"; 
+import { UpdateClient, GetClients } from "../../../Redux/actions"; 
 import { FaXmark } from "react-icons/fa6";
 
-export default function ToggleSupplierStatus({ supplier }) {
+export default function ToggleClientStatus({ client }) {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
 
-  const isDisabled = supplier.is_activate === 0;
+  const isDisabled = client.is_activate === 0;
 
   const handleOpenModal = () => {
     setShowModal(true);
@@ -19,16 +19,16 @@ export default function ToggleSupplierStatus({ supplier }) {
 
   const handleSave = async () => {
     try {
-      const updatedSupplier = {
-        ...supplier,
-        is_activate: isDisabled ? 1 : 0,
+      const updatedClient = {
+        ...client,
+        is_activate: isDisabled ? 1 : 0, 
       };
 
-      await dispatch(UpdateSupplier(supplier.id, updatedSupplier));
-      await dispatch(GetSuppliers());
+      await dispatch(UpdateClient(client.id, updatedClient)); 
+      await dispatch(GetClients()); 
       handleCloseModal();
     } catch (error) {
-      alert("Error actualizando proveedor");
+      alert("Error actualizando cliente");
     }
   };
 
@@ -59,8 +59,8 @@ export default function ToggleSupplierStatus({ supplier }) {
             </div>
 
             <p className="text-gray-700 text-lg">
-              ¿Está seguro que desea {isDisabled ? "activar" : "desactivar"} el proveedor{" "}
-              <span className="font-semibold">{supplier?.supplier_name}</span>?
+              ¿Está seguro que desea {isDisabled ? "activar" : "desactivar"} al cliente{" "}
+              <span className="font-semibold">{client?.client_name}</span>?
             </p>
 
             <div className="flex justify-end gap-3 mt-6">
